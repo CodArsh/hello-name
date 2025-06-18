@@ -1,118 +1,183 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { View, ScrollView, Text, Alert, StyleSheet } from 'react-native';
+import { GripButton } from './src/Component/GripButton'; // Correct the path if needed
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+const GripButtonExamples = () => {
+  const handlePress = (msg: string) => console.log(msg);
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView style={styles.container}>
+      <Text style={styles.heading}>🎯 Grip Button Showcase</Text>
+
+      {/* Solid Variant */}
+      <Section title="🔹 Solid Variants">
+        <GripButton
+          title="Pay Now"
+          variant="solid"
+          colorType="info"
+          icon={<Text style={styles.icon}>💳</Text>}
+          animationType="punch"
+          titleCase="capitalize"
+          shape="rounded"
+          onPress={() => handlePress('Solid Info')}
+        />
+        <GripButton
+          title="Submit"
+          variant="solid"
+          colorType="success"
+          shape="pill"
+          onPress={() => handlePress('Success')}
+        />
+      </Section>
+
+      {/* Outline Variant */}
+      <Section title="🔹 Outline Variant">
+        <GripButton
+          title="Warning"
+          variant="outline"
+          colorType="warning"
+          icon={<Text style={styles.icon}>⚠️</Text>}
+          iconPosition="right"
+          titleCase="uppercase"
+          shape="rounded"
+          onPress={() => handlePress('Warning')}
+        />
+      </Section>
+
+      {/* Clear Variant */}
+      <Section title="🔹 Clear Variant">
+        <GripButton
+          title="Clear Button"
+          variant="clear"
+          colorType="error"
+          icon={<Text style={styles.icon}>🚫</Text>}
+          animationType="punch"
+          shape="pill"
+          onPress={() => handlePress('Clear')}
+        />
+      </Section>
+
+      {/* Dashed Variant */}
+      <Section title="🔹 Dashed Variant">
+        <GripButton
+          title="Delete"
+          variant="dashed"
+          colorType="error"
+          icon={<Text style={styles.icon}>🗑️</Text>}
+          animationType="scale"
+          titleCase="capitalize"
+          shape="pill"
+          onPress={() => handlePress('Deleted!')}
+        />
+      </Section>
+
+      {/* Ghost Variant */}
+      <Section title="🔹 Ghost Variant">
+        <GripButton
+          title="Ghost UI"
+          variant="ghost"
+          colorType="info"
+          icon={<Text style={styles.icon}>💎</Text>}
+          animationType="scale"
+          shape="pill"
+          onPress={() => handlePress('Ghost')}
+        />
+      </Section>
+
+      {/* Link Variant */}
+      <Section title="🔹 Link Variant">
+        <GripButton
+          title="Open Link"
+          variant="link"
+          colorType="info"
+          icon={<Text style={styles.icon}>🔗</Text>}
+          shape="pill"
+          onPress={() => handlePress('Link')}
+        />
+      </Section>
+
+      {/* Elevated Variant */}
+      <Section title="🔹 Elevated Variant">
+        <GripButton
+          title="Magic"
+          variant="elevated"
+          colorType="info"
+          icon={<Text style={styles.icon}>✨</Text>}
+          shape="rounded"
+          style={{ backgroundColor: 'hotpink' }}
+          onPress={() => handlePress('Magic')}
+        />
+      </Section>
+
+      {/* Disabled */}
+      <Section title="🔹 Disabled + Loading">
+        <GripButton
+          title="Disabled"
+          variant="solid"
+          colorType="warning"
+          disabled
+          shape="rounded"
+        />
+        <GripButton
+          title="Loading"
+          variant="outline"
+          colorType="success"
+          loading
+          shape="rounded"
+        />
+      </Section>
+
+      {/* Size & Custom Style */}
+      <Section title="🔹 Large Size + Custom Style">
+        <GripButton
+          size="large"
+          style={{ backgroundColor: 'black' }}
+          title="Next"
+          variant="solid"
+          colorType="success"
+          shape="square"
+        />
+      </Section>
+    </ScrollView>
   );
-}
+};
+
+const Section = ({ title, children }: any) => (
+  <View style={styles.section}>
+    <Text style={styles.sectionTitle}>{title}</Text>
+    <View style={styles.buttonGroup}>{children}</View>
+  </View>
+);
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    backgroundColor: '#FAFAFA',
+    padding: 16,
+  },
+  heading: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 24,
+    color: '#333',
+    textAlign: 'center',
+
+  },
+  section: {
+    marginBottom: 24,
   },
   sectionTitle: {
-    fontSize: 24,
+    fontSize: 14,
     fontWeight: '600',
+    marginBottom: 8,
+    color: '#555',
   },
-  sectionDescription: {
-    marginTop: 8,
+  buttonGroup: {
+    gap: 12,
+  },
+  icon: {
     fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
   },
 });
 
-export default App;
+export default GripButtonExamples;
